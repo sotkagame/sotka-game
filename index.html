@@ -1,2 +1,79 @@
-<h1>СОТКА 💯</h1>
-<p>Тест запуска игры</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сотка 💯</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 20px;
+      color: #555;
+    }
+
+    #counter {
+      font-size: 80px;
+      font-weight: bold;
+      margin: 40px 0;
+    }
+
+    button {
+      font-size: 28px;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .plus {
+      background: #28a745;
+      color: white;
+    }
+
+    .reset {
+      background: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>СОТКА 💯</h1>
+  <p>Нажимай кнопку и набери 100</p>
+
+  <div id="counter">0</div>
+
+  <button class="plus" onclick="plusOne()">+1</button>
+  <button class="reset" onclick="resetGame()">Сброс</button>
+
+  <script>
+    let count = 0;
+
+    function plusOne() {
+      count++;
+      document.getElementById("counter").innerText = count;
+
+      if (count === 100) {
+        alert("🔥 Сотка сделана! Красавчик!");
+      }
+    }
+
+    function resetGame() {
+      count = 0;
+      document.getElementById("counter").innerText = count;
+    }
+  </script>
+</body>
+</html>
