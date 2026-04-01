@@ -41,7 +41,7 @@ select {
 <h1>СОТКА 💯</h1>
 
 <div class="info">Игры: <span id="games">10</span></div>
-<div class="info">Таймер: <span id="timer">5</span></div>
+<div class="info">Таймер: <span id="timer">7</span></div>
 
 <div id="botNumber">?</div>
 
@@ -65,6 +65,10 @@ let bonusGiven = false;
 
 const player1 = document.getElementById('player1');
 const player2 = document.getElementById('player2');
+const timerEl = document.getElementById('timer');
+const resultEl = document.getElementById('result');
+const botEl = document.getElementById('botNumber');
+const gamesEl = document.getElementById('games');
 
 for (let i = 1; i <= 100; i++) {
     let option1 = document.createElement('option');
@@ -86,23 +90,42 @@ function startRound() {
         if (!bonusGiven) {
             games = 5;
             bonusGiven = true;
-            document.getElementById('games').innerText = games;
-            document.getElementById('result').innerText = "🎁 Подарочные 5 игр!";
+            gamesEl.innerText = games;
+            resultEl.innerText = "🎁 Подарочные 5 игр!";
         } else {
-            document.getElementById('result').innerText = "⭐ Игры закончились";
+            resultEl.innerText = "⭐ Игры закончились";
             return;
         }
     }
 
-    document.getElementById('botNumber').innerText = "?";
-    document.getElementById('result').innerText = "Выберите число";
-    
-    let time = 5;
-    document.getElementById('timer').innerText = time;
+    botEl.innerText = "?";
+    resultEl.innerText = "Выберите числа за 7 секунд";
+    startPlayerTimer();
+}
+
+function startPlayerTimer() {
+    let time = 7;
+    timerEl.innerText = time;
 
     let countdown = setInterval(() => {
         time--;
-        document.getElementById('timer').innerText = time;
+        timerEl.innerText = time;
+
+        if (time <= 0) {
+            clearInterval(countdown);
+            startBotCountdown();
+        }
+    }, 1000);
+}
+
+function startBotCountdown() {
+    let time = 3;
+    resultEl.innerText = "🤖 Бот загадывает число...";
+    timerEl.innerText = time;
+
+    let countdown = setInterval(() => {
+        time--;
+        timerEl.innerText = time;
 
         if (time <= 0) {
             clearInterval(countdown);
@@ -116,7 +139,7 @@ function revealNumber() {
     const p1 = Number(player1.value);
     const p2 = Number(player2.value);
 
-    document.getElementById('botNumber').innerText = bot;
+    botEl.innerText = bot;
 
     const diff1 = Math.abs(bot - p1);
     const diff2 = Math.abs(bot - p2);
@@ -131,10 +154,10 @@ function revealNumber() {
         resultText = "🤝 Ничья";
     }
 
-    document.getElementById('result').innerText = resultText;
+    resultEl.innerText = resultText;
 
     games--;
-    document.getElementById('games').innerText = games;
+    gamesEl.innerText = games;
 
     setTimeout(startRound, 3000);
 }
