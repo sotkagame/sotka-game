@@ -1,79 +1,146 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Сотка 💯</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      text-align: center;
-      padding: 40px 20px;
-      margin: 0;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 20px;
-      color: #555;
-    }
-
-    #counter {
-      font-size: 80px;
-      font-weight: bold;
-      margin: 40px 0;
-    }
-
-    button {
-      font-size: 28px;
-      padding: 20px 40px;
-      border: none;
-      border-radius: 16px;
-      margin: 10px;
-      cursor: pointer;
-    }
-
-    .plus {
-      background: #28a745;
-      color: white;
-    }
-
-    .reset {
-      background: #dc3545;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сотка 100</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    margin-bottom: 10px;
+}
+#botNumber {
+    font-size: 60px;
+    margin: 20px 0;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+select {
+    width: 90px;
+    height: 180px;
+    font-size: 24px;
+}
+.info {
+    font-size: 22px;
+    margin: 15px 0;
+}
+</style>
 </head>
 <body>
-  <h1>СОТКА 💯</h1>
-  <p>Нажимай кнопку и набери 100</p>
 
-  <div id="counter">0</div>
+<h1>СОТКА 💯</h1>
 
-  <button class="plus" onclick="plusOne()">+1</button>
-  <button class="reset" onclick="resetGame()">Сброс</button>
+<div class="info">Игры: <span id="games">10</span></div>
+<div class="info">Таймер: <span id="timer">5</span></div>
 
-  <script>
-    let count = 0;
+<div id="botNumber">?</div>
 
-    function plusOne() {
-      count++;
-      document.getElementById("counter").innerText = count;
+<div class="container">
+    <div>
+        <div>Игрок 1</div>
+        <select id="player1" size="5"></select>
+    </div>
 
-      if (count === 100) {
-        alert("🔥 Сотка сделана! Красавчик!");
-      }
+    <div>
+        <div>Игрок 2</div>
+        <select id="player2" size="5"></select>
+    </div>
+</div>
+
+<div class="info" id="result">Раунд начинается...</div>
+
+<script>
+let games = 10;
+let bonusGiven = false;
+
+const player1 = document.getElementById('player1');
+const player2 = document.getElementById('player2');
+
+for (let i = 1; i <= 100; i++) {
+    let option1 = document.createElement('option');
+    option1.value = i;
+    option1.text = i;
+    player1.appendChild(option1);
+
+    let option2 = document.createElement('option');
+    option2.value = i;
+    option2.text = i;
+    player2.appendChild(option2);
+}
+
+player1.value = 50;
+player2.value = 50;
+
+function startRound() {
+    if (games <= 0) {
+        if (!bonusGiven) {
+            games = 5;
+            bonusGiven = true;
+            document.getElementById('games').innerText = games;
+            document.getElementById('result').innerText = "🎁 Подарочные 5 игр!";
+        } else {
+            document.getElementById('result').innerText = "⭐ Игры закончились";
+            return;
+        }
     }
 
-    function resetGame() {
-      count = 0;
-      document.getElementById("counter").innerText = count;
+    document.getElementById('botNumber').innerText = "?";
+    document.getElementById('result').innerText = "Выберите число";
+    
+    let time = 5;
+    document.getElementById('timer').innerText = time;
+
+    let countdown = setInterval(() => {
+        time--;
+        document.getElementById('timer').innerText = time;
+
+        if (time <= 0) {
+            clearInterval(countdown);
+            revealNumber();
+        }
+    }, 1000);
+}
+
+function revealNumber() {
+    const bot = Math.floor(Math.random() * 100) + 1;
+    const p1 = Number(player1.value);
+    const p2 = Number(player2.value);
+
+    document.getElementById('botNumber').innerText = bot;
+
+    const diff1 = Math.abs(bot - p1);
+    const diff2 = Math.abs(bot - p2);
+
+    let resultText = "";
+
+    if (diff1 < diff2) {
+        resultText = "🏆 Победил Игрок 1";
+    } else if (diff2 < diff1) {
+        resultText = "🏆 Победил Игрок 2";
+    } else {
+        resultText = "🤝 Ничья";
     }
-  </script>
+
+    document.getElementById('result').innerText = resultText;
+
+    games--;
+    document.getElementById('games').innerText = games;
+
+    setTimeout(startRound, 3000);
+}
+
+startRound();
+</script>
+
 </body>
 </html>
