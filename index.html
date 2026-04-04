@@ -3,225 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>СОТКА 100 VIP</title>
+<title>SOTKA 100 VIP</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:linear-gradient(180deg,#081633,#020816);
-    color:gold;
     text-align:center;
-    overflow:hidden;
+    color:gold;
+    min-height:100vh;
+    overflow-y:auto;
+    background:
+        radial-gradient(circle at top,#4c1d6f 0%,#170028 45%,#050015 100%);
+}
+
+.container{
+    padding:10px 12px 30px 12px;
 }
 
 .header{
-    font-size:48px;
-    font-weight:bold;
-    margin-top:20px;
-    text-shadow:0 0 20px gold;
-}
-
-.top-bar{
-    display:flex;
-    justify-content:space-around;
-    color:white;
-    font-size:18px;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#ffd700;
     margin-top:10px;
-}
-
-.circle{
-    width:190px;
-    height:190px;
-    margin:20px auto;
-    border:6px solid gold;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:90px;
-    box-shadow:0 0 30px gold;
-    animation:spin 3s linear infinite;
-}
-
-@keyframes spin{
-    from{transform:rotateY(0deg);}
-    to{transform:rotateY(360deg);}
-}
-
-.timer{
-    font-size:24px;
-    margin-bottom:15px;
-}
-
-.wheels{
-    display:flex;
-    justify-content:space-around;
-    margin-top:20px;
-}
-
-select{
-    width:110px;
-    height:240px;
-    font-size:30px;
-    background:#102a66;
-    color:gold;
-    border:3px solid gold;
-    border-radius:20px;
-}
-
-button{
-    margin-top:18px;
-    font-size:20px;
-    padding:12px 24px;
-    border:none;
-    border-radius:12px;
-    background:gold;
-    color:black;
-    font-weight:bold;
-}
-
-.result{
-    margin-top:20px;
-    font-size:28px;
-    color:white;
-}
-
-.crown{
-    font-size:60px;
-    display:none;
-}
-
-.coins{
-    font-size:80px;
-    display:none;
-    animation:pop 1s ease;
-}
-
-@keyframes pop{
-    from{transform:scale(0);}
-    to{transform:scale(1);}
-}
-
-.bottom-panel{
-    margin-top:20px;
-    color:white;
+    text-shadow:
+        0 0 10px gold,
+        0 0 20px #ffcc00,
+        0 4px 0 #7a4b00;
 }
 
 .vip{
+    font-size:18px;
+    margin-bottom:12px;
+    color:#ffd700;
+}
+
+.players{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0 12px 0;
+    color:white;
+    font-size:16px;
+}
+
+.player{
+    width:48%;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:2px solid gold;
+    margin:0 auto 6px auto;
+    box-shadow:0 0 10px gold;
+    background:radial-gradient(circle,#fff,#bbb);
+}
+
+.timer{
+    font-size:28px;
+    margin:8px 0;
+    text-shadow:0 0 12px gold;
+}
+
+.circle{
+    width:170px;
+    height:170px;
+    margin:10px auto;
+    border:6px solid gold;
+    border-radius:50%;
+    box-shadow:0 0 25px gold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:90px;
+    background:rgba(255,255,255,0.03);
+    animation:spinQuestion 4s linear infinite;
+}
+
+@keyframes spinQuestion{
+    0%{transform:rotateY(0deg);}
+    100%{transform:rotateY(360deg);}
+}
+
+.pick-text{
+    font-size:24px;
+    margin:10px 0;
+}
+
+.game-area{
+    display:flex;
+    justify-content:space-between;
     margin-top:10px;
-    color:#d4af37;
-    font-size:22px;
+}
+
+.wheel{
+    width:46%;
+    height:180px;
+    border:4px solid gold;
+    border-radius:22px;
+    box-shadow:0 0 15px gold;
+    background:linear-gradient(180deg,#34216e,#1a1248);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+select{
+    width:80px;
+    height:150px;
+    font-size:42px;
+    background:transparent;
+    color:gold;
+    border:none;
+    text-align:center;
+}
+
+.bottom-buttons{
+    margin-top:18px;
+}
+
+.btn{
+    width:260px;
+    margin:10px auto;
+    padding:12px;
+    font-size:20px;
+    border-radius:28px;
+    border:2px solid gold;
+    color:gold;
+    background:linear-gradient(180deg,#5a1f8a,#2c0f56);
+    box-shadow:0 0 12px gold;
 }
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<div class="header">СОТКА 100</div>
+<div class="header">👑 SOTKA 100</div>
+<div class="vip">VIP стол</div>
 
-<div class="top-bar">
-    <div id="player1info">Игрок 1 ⭐ Рейтинг: 1000</div>
-    <div id="player2info">Игрок 2 ⭐ Рейтинг: 1000</div>
+<div class="players">
+    <div class="player">
+        <div class="avatar"></div>
+        Игрок 1 ⭐<br>
+        Рейтинг: <span id="score1">1000</span>
+    </div>
+
+    <div class="player">
+        <div class="avatar"></div>
+        Игрок 2 ⭐<br>
+        Рейтинг: <span id="score2">1000</span>
+    </div>
 </div>
 
-<div class="circle" id="circle">?</div>
+<div class="timer">⏳ <span id="timer">15</span></div>
 
-<div class="timer" id="timer">Выберите число: 15</div>
+<div class="circle" id="question">?</div>
 
-<div class="wheels">
-    <select id="p1" size="5"></select>
-    <select id="p2" size="5"></select>
+<div class="pick-text">
+    Выберите число: <span id="selected">50</span>
 </div>
 
-<button onclick="fixNumbers()">Зафиксировать</button>
+<div class="game-area">
+    <div class="wheel">
+        <select id="player1" size="3"></select>
+    </div>
 
-<div class="result" id="result"></div>
-<div class="crown" id="crown">👑</div>
-<div class="coins" id="coins">💰🪙💰🪙</div>
+    <div class="wheel">
+        <select id="player2" size="3"></select>
+    </div>
+</div>
 
-<div class="bottom-panel">
-    <div>⭐ Пакеты: 5 = 10 игр | 10 = 25 игр | 20 = 60 игр</div>
-    <div class="vip">💎 VIP ROOM — 50 Stars / 24 часа</div>
+<div class="bottom-buttons">
+    <div class="btn">⭐ Купить пакет</div>
+    <div class="btn">👑 VIP 24 часа</div>
+</div>
+
 </div>
 
 <script>
-let rating1=1000;
-let rating2=1000;
-let fixed=false;
+const p1=document.getElementById("player1");
+const p2=document.getElementById("player2");
+const selected=document.getElementById("selected");
+const timer=document.getElementById("timer");
+const question=document.getElementById("question");
+const score1=document.getElementById("score1");
+const score2=document.getElementById("score2");
 
 for(let i=1;i<=100;i++){
-    p1.innerHTML += `<option>${i}</option>`;
-    p2.innerHTML += `<option>${i}</option>`;
+    let o1=document.createElement("option");
+    o1.text=i;
+    p1.add(o1);
+
+    let o2=document.createElement("option");
+    o2.text=i;
+    p2.add(o2);
 }
+
+p1.selectedIndex=49;
+p2.selectedIndex=49;
+
+function updateSelected(){
+    selected.innerText=p1.value;
+}
+
+p1.addEventListener("change",updateSelected);
 
 let time=15;
 
-let timer=setInterval(()=>{
-    if(fixed) return;
-
+let countdown=setInterval(()=>{
     time--;
-    document.getElementById("timer").innerText="Выберите число: "+time;
+    timer.innerText=time;
 
     if(time<=0){
-        clearInterval(timer);
-        reveal();
+        clearInterval(countdown);
+
+        question.style.animation="none";
+
+        let secret=Math.floor(Math.random()*100)+1;
+
+        setTimeout(()=>{
+            question.innerText=secret;
+
+            let v1=parseInt(p1.value);
+            let v2=parseInt(p2.value);
+
+            let d1=Math.abs(secret-v1);
+            let d2=Math.abs(secret-v2);
+
+            if(d1<d2){
+                score1.innerText=parseInt(score1.innerText)+25;
+            }else if(d2<d1){
+                score2.innerText=parseInt(score2.innerText)+25;
+            }
+        },800);
     }
 },1000);
-
-function fixNumbers(){
-    if(fixed) return;
-    fixed=true;
-    clearInterval(timer);
-    reveal();
-}
-
-function reveal(){
-    let circle=document.getElementById("circle");
-    let count=3;
-
-    let countdown=setInterval(()=>{
-        circle.style.animation="none";
-        circle.innerText=count;
-        count--;
-
-        if(count<0){
-            clearInterval(countdown);
-
-            let bot=Math.floor(Math.random()*100)+1;
-            circle.innerText=bot;
-
-            calculateWinner(bot);
-        }
-    },1000);
-}
-
-function calculateWinner(bot){
-    let n1=parseInt(p1.value);
-    let n2=parseInt(p2.value);
-
-    let d1=Math.abs(n1-bot);
-    let d2=Math.abs(n2-bot);
-
-    let result=document.getElementById("result");
-
-    if(d1<d2){
-        result.innerText="🏆 Победил Игрок 1";
-        rating1 += 25;
-    }else if(d2<d1){
-        result.innerText="🏆 Победил Игрок 2";
-        rating2 += 25;
-    }else{
-        result.innerText="🤝 Ничья";
-    }
-
-    document.getElementById("player1info").innerText="Игрок 1 ⭐ Рейтинг: "+rating1;
-    document.getElementById("player2info").innerText="Игрок 2 ⭐ Рейтинг: "+rating2;
-
-    document.getElementById("crown").style.display="block";
-    document.getElementById("coins").style.display="block";
-}
 </script>
-
 </body>
 </html>
