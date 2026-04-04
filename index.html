@@ -3,166 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Сотка 100</title>
+<title>СОТКА 100 VIP</title>
+
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(180deg,#081633,#020816);
+    color:gold;
+    text-align:center;
+    overflow:hidden;
 }
-h1 {
-    margin-bottom: 10px;
+
+.header{
+    font-size:48px;
+    font-weight:bold;
+    margin-top:20px;
+    text-shadow:0 0 20px gold;
 }
-#botNumber {
-    font-size: 60px;
-    margin: 20px 0;
+
+.top-bar{
+    display:flex;
+    justify-content:space-around;
+    color:white;
+    font-size:18px;
+    margin-top:10px;
 }
-.container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 20px 0;
+
+.circle{
+    width:190px;
+    height:190px;
+    margin:20px auto;
+    border:6px solid gold;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:90px;
+    box-shadow:0 0 30px gold;
+    animation:spin 3s linear infinite;
 }
-select {
-    width: 90px;
-    height: 180px;
-    font-size: 24px;
+
+@keyframes spin{
+    from{transform:rotateY(0deg);}
+    to{transform:rotateY(360deg);}
 }
-.info {
-    font-size: 22px;
-    margin: 15px 0;
+
+.timer{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.wheels{
+    display:flex;
+    justify-content:space-around;
+    margin-top:20px;
+}
+
+select{
+    width:110px;
+    height:240px;
+    font-size:30px;
+    background:#102a66;
+    color:gold;
+    border:3px solid gold;
+    border-radius:20px;
+}
+
+button{
+    margin-top:18px;
+    font-size:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:12px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+}
+
+.result{
+    margin-top:20px;
+    font-size:28px;
+    color:white;
+}
+
+.crown{
+    font-size:60px;
+    display:none;
+}
+
+.coins{
+    font-size:80px;
+    display:none;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(0);}
+    to{transform:scale(1);}
+}
+
+.bottom-panel{
+    margin-top:20px;
+    color:white;
+}
+
+.vip{
+    margin-top:10px;
+    color:#d4af37;
+    font-size:22px;
 }
 </style>
 </head>
+
 <body>
 
-<h1>СОТКА 💯</h1>
+<div class="header">СОТКА 100</div>
 
-<div class="info">Игры: <span id="games">10</span></div>
-<div class="info">Таймер: <span id="timer">7</span></div>
-
-<div id="botNumber">?</div>
-
-<div class="container">
-    <div>
-        <div>Игрок 1</div>
-        <select id="player1" size="5"></select>
-    </div>
-
-    <div>
-        <div>Игрок 2</div>
-        <select id="player2" size="5"></select>
-    </div>
+<div class="top-bar">
+    <div id="player1info">Игрок 1 ⭐ Рейтинг: 1000</div>
+    <div id="player2info">Игрок 2 ⭐ Рейтинг: 1000</div>
 </div>
 
-<div class="info" id="result">Раунд начинается...</div>
+<div class="circle" id="circle">?</div>
+
+<div class="timer" id="timer">Выберите число: 15</div>
+
+<div class="wheels">
+    <select id="p1" size="5"></select>
+    <select id="p2" size="5"></select>
+</div>
+
+<button onclick="fixNumbers()">Зафиксировать</button>
+
+<div class="result" id="result"></div>
+<div class="crown" id="crown">👑</div>
+<div class="coins" id="coins">💰🪙💰🪙</div>
+
+<div class="bottom-panel">
+    <div>⭐ Пакеты: 5 = 10 игр | 10 = 25 игр | 20 = 60 игр</div>
+    <div class="vip">💎 VIP ROOM — 50 Stars / 24 часа</div>
+</div>
 
 <script>
-let games = 10;
-let bonusGiven = false;
+let rating1=1000;
+let rating2=1000;
+let fixed=false;
 
-const player1 = document.getElementById('player1');
-const player2 = document.getElementById('player2');
-const timerEl = document.getElementById('timer');
-const resultEl = document.getElementById('result');
-const botEl = document.getElementById('botNumber');
-const gamesEl = document.getElementById('games');
-
-for (let i = 1; i <= 100; i++) {
-    let option1 = document.createElement('option');
-    option1.value = i;
-    option1.text = i;
-    player1.appendChild(option1);
-
-    let option2 = document.createElement('option');
-    option2.value = i;
-    option2.text = i;
-    player2.appendChild(option2);
+for(let i=1;i<=100;i++){
+    p1.innerHTML += `<option>${i}</option>`;
+    p2.innerHTML += `<option>${i}</option>`;
 }
 
-player1.value = 50;
-player2.value = 50;
+let time=15;
 
-function startRound() {
-    if (games <= 0) {
-        if (!bonusGiven) {
-            games = 5;
-            bonusGiven = true;
-            gamesEl.innerText = games;
-            resultEl.innerText = "🎁 Подарочные 5 игр!";
-        } else {
-            resultEl.innerText = "⭐ Игры закончились";
-            return;
+let timer=setInterval(()=>{
+    if(fixed) return;
+
+    time--;
+    document.getElementById("timer").innerText="Выберите число: "+time;
+
+    if(time<=0){
+        clearInterval(timer);
+        reveal();
+    }
+},1000);
+
+function fixNumbers(){
+    if(fixed) return;
+    fixed=true;
+    clearInterval(timer);
+    reveal();
+}
+
+function reveal(){
+    let circle=document.getElementById("circle");
+    let count=3;
+
+    let countdown=setInterval(()=>{
+        circle.style.animation="none";
+        circle.innerText=count;
+        count--;
+
+        if(count<0){
+            clearInterval(countdown);
+
+            let bot=Math.floor(Math.random()*100)+1;
+            circle.innerText=bot;
+
+            calculateWinner(bot);
         }
+    },1000);
+}
+
+function calculateWinner(bot){
+    let n1=parseInt(p1.value);
+    let n2=parseInt(p2.value);
+
+    let d1=Math.abs(n1-bot);
+    let d2=Math.abs(n2-bot);
+
+    let result=document.getElementById("result");
+
+    if(d1<d2){
+        result.innerText="🏆 Победил Игрок 1";
+        rating1 += 25;
+    }else if(d2<d1){
+        result.innerText="🏆 Победил Игрок 2";
+        rating2 += 25;
+    }else{
+        result.innerText="🤝 Ничья";
     }
 
-    botEl.innerText = "?";
-    resultEl.innerText = "Выберите числа за 7 секунд";
-    startPlayerTimer();
+    document.getElementById("player1info").innerText="Игрок 1 ⭐ Рейтинг: "+rating1;
+    document.getElementById("player2info").innerText="Игрок 2 ⭐ Рейтинг: "+rating2;
+
+    document.getElementById("crown").style.display="block";
+    document.getElementById("coins").style.display="block";
 }
-
-function startPlayerTimer() {
-    let time = 7;
-    timerEl.innerText = time;
-
-    let countdown = setInterval(() => {
-        time--;
-        timerEl.innerText = time;
-
-        if (time <= 0) {
-            clearInterval(countdown);
-            startBotCountdown();
-        }
-    }, 1000);
-}
-
-function startBotCountdown() {
-    let time = 3;
-    resultEl.innerText = "🤖 Бот загадывает число...";
-    timerEl.innerText = time;
-
-    let countdown = setInterval(() => {
-        time--;
-        timerEl.innerText = time;
-
-        if (time <= 0) {
-            clearInterval(countdown);
-            revealNumber();
-        }
-    }, 1000);
-}
-
-function revealNumber() {
-    const bot = Math.floor(Math.random() * 100) + 1;
-    const p1 = Number(player1.value);
-    const p2 = Number(player2.value);
-
-    botEl.innerText = bot;
-
-    const diff1 = Math.abs(bot - p1);
-    const diff2 = Math.abs(bot - p2);
-
-    let resultText = "";
-
-    if (diff1 < diff2) {
-        resultText = "🏆 Победил Игрок 1";
-    } else if (diff2 < diff1) {
-        resultText = "🏆 Победил Игрок 2";
-    } else {
-        resultText = "🤝 Ничья";
-    }
-
-    resultEl.innerText = resultText;
-
-    games--;
-    gamesEl.innerText = games;
-
-    setTimeout(startRound, 3000);
-}
-
-startRound();
 </script>
 
 </body>
