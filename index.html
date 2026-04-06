@@ -17,110 +17,117 @@ html, body{
     height:100%;
     overflow:hidden;
     font-family:Arial, sans-serif;
-    background:#140028;
 }
 
-/* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ */
 body{
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
+    background: radial-gradient(circle at top, #4b0a84 0%, #220044 60%, #100020 100%);
+    color: gold;
 }
 
-/* Фиксированный экран */
 .game{
-    width:100vw;
-    max-width:430px;
+    width:100%;
     height:100vh;
-    max-height:820px;
-    overflow:hidden;
-    background:
-        radial-gradient(circle at top, #4b0a84 0%, #220044 55%, #100020 100%);
-    color:gold;
-    padding:20px;
+    padding:20px 16px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 }
 
-/* Заголовок */
+/* верх */
+.crown{
+    font-size:72px;
+    margin-top:10px;
+}
+
 .title{
-    text-align:center;
-    font-size:88px;
+    font-size:76px;
     font-weight:700;
     line-height:1;
-    text-shadow:0 0 25px gold;
+    text-shadow:0 0 20px rgba(255,215,0,0.7);
+    margin-top:8px;
+}
+
+.number100{
+    font-size:110px;
+    font-weight:700;
+    line-height:1;
+    text-shadow:0 0 25px rgba(255,215,0,0.7);
+    margin-top:10px;
 }
 
 .vip{
-    text-align:center;
     font-size:34px;
-    margin-top:15px;
+    margin-top:8px;
 }
 
-/* Игроки */
+/* игроки */
 .players{
+    width:100%;
     display:flex;
     justify-content:space-between;
-    margin-top:60px;
+    margin-top:40px;
 }
 
 .player{
     width:48%;
     text-align:center;
-    font-size:24px;
+    font-size:20px;
 }
 
 .avatar{
-    width:140px;
-    height:140px;
+    width:120px;
+    height:120px;
     border-radius:50%;
     background:#ddd;
-    border:5px solid gold;
-    box-shadow:0 0 30px gold;
-    margin:0 auto 20px;
+    border:4px solid gold;
+    box-shadow:0 0 20px rgba(255,215,0,0.8);
+    margin:0 auto 14px;
 }
 
-/* Таймер */
+/* таймер */
 .timer{
-    margin-top:60px;
-    text-align:center;
-    font-size:72px;
-    text-shadow:0 0 20px gold;
+    margin-top:30px;
+    font-size:56px;
+    text-shadow:0 0 15px rgba(255,215,0,0.7);
 }
 
-/* Центральный круг */
+/* центральный круг */
 .circle{
-    width:260px;
-    height:260px;
+    width:210px;
+    height:210px;
     border-radius:50%;
-    border:6px solid gold;
-    box-shadow:0 0 35px gold;
-    margin:40px auto 0;
+    border:5px solid gold;
+    box-shadow:0 0 25px rgba(255,215,0,0.8);
     display:flex;
-    align-items:center;
     justify-content:center;
-    font-size:120px;
-}
-
-/* Выбор */
-.choice{
+    align-items:center;
+    font-size:96px;
     margin-top:25px;
-    text-align:center;
-    font-size:42px;
 }
 
-/* Нижние кнопки */
+/* число */
+.choice{
+    font-size:34px;
+    margin-top:20px;
+}
+
+/* кнопки */
 .buttons{
+    width:100%;
     display:flex;
-    gap:20px;
-    margin-top:35px;
+    gap:14px;
+    margin-top:auto;
+    padding-bottom:20px;
 }
 
 .btn{
     flex:1;
-    height:110px;
-    border-radius:25px;
+    height:90px;
+    border-radius:20px;
     border:4px solid gold;
     background:rgba(255,255,255,0.04);
-    box-shadow:0 0 18px rgba(255,215,0,0.4);
+    box-shadow:0 0 15px rgba(255,215,0,0.4);
 }
 </style>
 </head>
@@ -129,19 +136,22 @@ body{
 
 <div class="game">
 
-    <div style="text-align:center; font-size:80px;">👑 SOTKA</div>
-    <div class="title">100</div>
+    <div class="crown">👑</div>
+    <div class="title">SOTKA</div>
+    <div class="number100">100</div>
     <div class="vip">VIP стол</div>
 
     <div class="players">
         <div class="player">
             <div class="avatar"></div>
-            Игрок 1 ⭐<br>Рейтинг: 1000
+            Игрок 1 ⭐<br>
+            Рейтинг: 1000
         </div>
 
         <div class="player">
             <div class="avatar"></div>
-            Игрок 2 ⭐<br>Рейтинг: 1000
+            Игрок 2 ⭐<br>
+            Рейтинг: 1000
         </div>
     </div>
 
