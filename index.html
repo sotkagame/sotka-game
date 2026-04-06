@@ -2,116 +2,116 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>SOTKA 100 VIP</title>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
-html,body{
+html, body{
     width:100%;
     height:100%;
     overflow:hidden;
-    font-family:Arial,sans-serif;
-    background:#120022;
+    font-family:Arial, sans-serif;
+    background:#140028;
 }
 
-/* Главное: фиксируем пропорции */
+/* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ */
 body{
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
 }
 
-/* Игровой экран */
+/* Фиксированный экран */
 .game{
-    width:min(100vw, 430px);
-    height:min(100vh, 850px);
-    aspect-ratio:9/16;
-    background:radial-gradient(circle at top,#4b0a84,#1a0033 70%);
-    color:gold;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:20px;
-    border-radius:30px;
+    width:100vw;
+    max-width:430px;
+    height:100vh;
+    max-height:820px;
     overflow:hidden;
+    background:
+        radial-gradient(circle at top, #4b0a84 0%, #220044 55%, #100020 100%);
+    color:gold;
+    padding:20px;
 }
 
 /* Заголовок */
 .title{
-    font-size:58px;
+    text-align:center;
+    font-size:88px;
     font-weight:700;
+    line-height:1;
     text-shadow:0 0 25px gold;
-    margin-top:10px;
 }
 
-.subtitle{
-    font-size:28px;
-    margin-top:8px;
+.vip{
+    text-align:center;
+    font-size:34px;
+    margin-top:15px;
 }
 
 /* Игроки */
 .players{
-    width:100%;
     display:flex;
     justify-content:space-between;
-    margin-top:40px;
+    margin-top:60px;
 }
 
 .player{
-    width:45%;
+    width:48%;
     text-align:center;
+    font-size:24px;
 }
 
 .avatar{
-    width:110px;
-    height:110px;
+    width:140px;
+    height:140px;
     border-radius:50%;
     background:#ddd;
-    margin:0 auto 15px;
-    border:4px solid gold;
-    box-shadow:0 0 25px gold;
+    border:5px solid gold;
+    box-shadow:0 0 30px gold;
+    margin:0 auto 20px;
 }
 
 /* Таймер */
 .timer{
-    font-size:48px;
-    margin-top:35px;
+    margin-top:60px;
+    text-align:center;
+    font-size:72px;
     text-shadow:0 0 20px gold;
 }
 
 /* Центральный круг */
 .circle{
-    width:250px;
-    height:250px;
+    width:260px;
+    height:260px;
     border-radius:50%;
     border:6px solid gold;
-    margin-top:30px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:120px;
     box-shadow:0 0 35px gold;
+    margin:40px auto 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:120px;
 }
 
-/* Текст */
+/* Выбор */
 .choice{
-    font-size:32px;
     margin-top:25px;
+    text-align:center;
+    font-size:42px;
 }
 
-/* Кнопки */
+/* Нижние кнопки */
 .buttons{
-    width:100%;
     display:flex;
     gap:20px;
-    margin-top:auto;
-    padding-bottom:20px;
+    margin-top:35px;
 }
 
 .btn{
@@ -119,8 +119,8 @@ body{
     height:110px;
     border-radius:25px;
     border:4px solid gold;
-    background:rgba(255,255,255,0.06);
-    box-shadow:0 0 20px rgba(255,215,0,0.4);
+    background:rgba(255,255,255,0.04);
+    box-shadow:0 0 18px rgba(255,215,0,0.4);
 }
 </style>
 </head>
@@ -129,9 +129,9 @@ body{
 
 <div class="game">
 
-    <div class="title">👑 SOTKA</div>
-    <div class="title" style="font-size:72px;">100</div>
-    <div class="subtitle">VIP стол</div>
+    <div style="text-align:center; font-size:80px;">👑 SOTKA</div>
+    <div class="title">100</div>
+    <div class="vip">VIP стол</div>
 
     <div class="players">
         <div class="player">
