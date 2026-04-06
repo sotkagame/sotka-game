@@ -10,40 +10,56 @@ body{
     margin:0;
     padding:0;
     font-family:Arial,sans-serif;
-    text-align:center;
-    color:gold;
-    min-height:100vh;
     background: radial-gradient(circle at top, #4b0082, #1a002f);
-    overflow-y:auto;
+    overflow:hidden;
 }
 
 .container{
-    max-width:430px;
+    width:100%;
+    max-width:390px;
+    height:100vh;
     margin:0 auto;
-    padding:20px 15px 40px;
+    padding:12px;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:gold;
+    text-align:center;
 }
 
 .title{
-    font-size:60px;
+    font-size:48px;
     font-weight:bold;
-    text-shadow:0 0 20px gold;
-    line-height:1.1;
-}
-
-.subtitle{
-    font-size:34px;
+    text-shadow:0 0 15px gold;
+    line-height:1;
     margin-top:10px;
 }
 
+.number-top{
+    font-size:80px;
+    font-weight:bold;
+    text-shadow:0 0 15px gold;
+    margin-top:5px;
+    line-height:1;
+}
+
+.subtitle{
+    font-size:28px;
+    margin-top:8px;
+    margin-bottom:20px;
+}
+
 .players{
+    width:100%;
     display:flex;
     justify-content:space-between;
-    margin-top:40px;
+    margin-top:10px;
 }
 
 .player{
     width:45%;
-    font-size:22px;
+    font-size:18px;
 }
 
 .avatar{
@@ -52,50 +68,32 @@ body{
     border-radius:50%;
     background:linear-gradient(145deg,#ffffff,#d9d9d9);
     border:4px solid gold;
-    box-shadow:0 0 20px gold;
+    box-shadow:0 0 15px gold;
     margin:0 auto 10px;
 }
 
 .timer{
-    margin-top:40px;
     font-size:48px;
+    margin-top:20px;
     text-shadow:0 0 15px gold;
 }
 
 .circle{
-    width:230px;
-    height:230px;
-    border:8px solid gold;
+    width:180px;
+    height:180px;
+    border:6px solid gold;
     border-radius:50%;
     display:flex;
-    align-items:center;
     justify-content:center;
-    margin:30px auto;
-    font-size:110px;
-    box-shadow:0 0 25px gold;
-}
-
-.number{
-    font-size:42px;
-    margin-bottom:30px;
-}
-
-.buttons{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    margin-top:30px;
-}
-
-.vip-btn{
-    padding:16px;
-    font-size:24px;
-    font-weight:bold;
-    border:none;
-    border-radius:18px;
-    background:gold;
-    color:#2b0055;
+    align-items:center;
+    font-size:90px;
+    margin-top:20px;
     box-shadow:0 0 20px gold;
+}
+
+.bottom-text{
+    font-size:28px;
+    margin-top:18px;
 }
 </style>
 </head>
@@ -103,7 +101,8 @@ body{
 <body>
 <div class="container">
 
-<div class="title">👑 SOTKA 100</div>
+<div class="title">👑 SOTKA</div>
+<div class="number-top">100</div>
 <div class="subtitle">VIP стол</div>
 
 <div class="players">
@@ -124,17 +123,7 @@ body{
 
 <div class="circle">30</div>
 
-<div class="number">Выберите число: 54</div>
-
-<div class="buttons">
-    <button class="vip-btn" onclick="alert('VIP пакет 100 ⭐ скоро будет доступен')">
-        Получить VIP пакет ⭐100
-    </button>
-
-    <button class="vip-btn" onclick="alert('VIP пакет 500 ⭐ скоро будет доступен')">
-        Получить VIP пакет ⭐500
-    </button>
-</div>
+<div class="bottom-text">Выберите число: 54</div>
 
 </div>
 </body>
