@@ -1,7 +1,6 @@
 <div class="game-wrap">
 
   <div class="score-row">
-
     <div class="side-box left">
       <div class="num">49</div>
       <div class="num">50</div>
@@ -32,22 +31,16 @@
       <div class="num">47</div>
       <div class="num">48</div>
     </div>
-
   </div>
+
 </div>
 
 <style>
-body{
-    background:#2b004f;
-    margin:0;
-    padding:0;
-}
-
 .game-wrap{
     width:100%;
     max-width:430px;
     margin:0 auto;
-    padding:20px 12px 140px;
+    padding:12px;
     box-sizing:border-box;
 }
 
@@ -78,7 +71,6 @@ body{
     color:gold;
     line-height:1;
     cursor:pointer;
-    transition:0.3s;
 }
 
 .center-box{
@@ -97,22 +89,27 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:clamp(60px, 10vw, 90px);
+    font-weight:700;
+    color:gold;
     box-shadow:0 0 25px gold;
 }
 
 .rotating-question{
-    font-size:clamp(60px, 10vw, 90px);
-    font-weight:700;
-    color:gold;
     animation: slowSpin 6s linear infinite;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
 }
 
 @keyframes slowSpin{
     from{
-        transform:rotateY(0deg);
+        transform: rotateY(0deg);
     }
     to{
-        transform:rotateY(360deg);
+        transform: rotateY(360deg);
     }
 }
 
@@ -146,7 +143,7 @@ body{
 }
 
 .rating-box{
-    margin-top:18px;
+    margin-top:20px;
     text-align:center;
     font-size:clamp(20px, 4vw, 30px);
     color:gold;
@@ -154,6 +151,10 @@ body{
 }
 
 @media (max-width:430px){
+    .score-row{
+        gap:8px;
+    }
+
     .side-box{
         min-height:240px;
     }
