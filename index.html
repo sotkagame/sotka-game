@@ -4,26 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>SOTKA VIP</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-html, body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+html,body{width:100%;height:100%;overflow:hidden;}
 body{
-    background: radial-gradient(circle at top, #4b0082 0%, #1b002d 70%, #0d0015 100%);
+    background:radial-gradient(circle at top,#4b0082 0%,#1b002d 70%,#0d0015 100%);
     color:gold;
 }
-
 .game{
     width:100%;
     max-width:430px;
@@ -32,144 +19,121 @@ body{
     padding:8px;
     display:flex;
     flex-direction:column;
-    overflow:hidden;
+    gap:8px;
 }
 
 /* header */
 .header{
     border:2px solid goldenrod;
-    border-radius:18px;
-    padding:10px;
-    text-align:center;
-}
-
-.logo{
-    font-size:44px;
-    font-weight:900;
-}
-
-.number{
-    font-size:62px;
-    font-weight:900;
-    line-height:1;
-}
-
-.vip{
-    font-size:22px;
-}
-
-/* top row */
-.top{
-    margin-top:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.card{
-    width:120px;
-    border:2px solid goldenrod;
     border-radius:16px;
     padding:8px;
     text-align:center;
-    font-size:16px;
 }
+.logo{font-size:34px;font-weight:900;}
+.number{font-size:48px;font-weight:900;line-height:1;}
+.vip{font-size:18px;}
 
+/* top */
+.top{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:8px;
+    align-items:center;
+}
+.card{
+    border:2px solid goldenrod;
+    border-radius:14px;
+    padding:6px;
+    text-align:center;
+    font-size:14px;
+}
 .timer{
-    font-size:42px;
+    font-size:32px;
     font-weight:bold;
+    text-align:center;
 }
 
 /* middle */
 .middle{
-    margin-top:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
     flex:1;
+    display:grid;
+    grid-template-columns:70px 1fr 70px;
+    gap:8px;
     min-height:0;
+    align-items:center;
 }
-
 .wheel{
-    width:80px;
-    height:250px;
+    height:220px;
     overflow-y:auto;
     border:2px solid goldenrod;
-    border-radius:18px;
-    text-align:center;
+    border-radius:14px;
     scroll-snap-type:y mandatory;
     -webkit-overflow-scrolling:touch;
 }
-
-.wheel::-webkit-scrollbar{
-    display:none;
-}
-
+.wheel::-webkit-scrollbar{display:none;}
 .num{
-    height:80px;
+    height:55px;
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:42px;
+    justify-content:center;
+    font-size:34px;
     font-weight:bold;
     scroll-snap-align:center;
 }
 
 .center{
-    width:180px;
-    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
 }
-
 .circle{
-    width:140px;
-    height:140px;
-    margin:0 auto;
+    width:120px;
+    height:120px;
     border:4px solid gold;
     border-radius:50%;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:70px;
+    font-size:60px;
     font-weight:bold;
-    box-shadow:0 0 16px rgba(255,215,0,0.5);
+    box-shadow:0 0 14px rgba(255,215,0,0.5);
 }
-
-.center-text{
-    margin-top:12px;
+.label{
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+}
+.selected-number{
     font-size:28px;
     font-weight:bold;
 }
-
 .rating{
-    margin-top:16px;
-    font-size:18px;
+    font-size:16px;
 }
 
 /* buttons */
 .buttons{
-    margin-top:8px;
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:6px;
 }
-
 .btn{
-    height:56px;
+    height:48px;
     border:2px solid goldenrod;
-    border-radius:18px;
+    border-radius:16px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:26px;
+    font-size:22px;
     font-weight:bold;
 }
 </style>
 </head>
-
 <body>
 
 <div class="game">
-
     <div class="header">
         <div class="logo">👑 SOTKA</div>
         <div class="number">100</div>
@@ -186,8 +150,9 @@ body{
         <div class="wheel" id="leftWheel"></div>
 
         <div class="center">
-            <div class="circle" id="selected">50</div>
-            <div class="center-text">УГАДАЙ ЧИСЛО</div>
+            <div class="circle">?</div>
+            <div class="label">УГАДАЙ ЧИСЛО</div>
+            <div class="selected-number" id="selected">50</div>
             <div class="rating">Рейтинг: 1000 / 1000</div>
         </div>
 
@@ -198,7 +163,6 @@ body{
         <div class="btn">⭐ Купить пакет</div>
         <div class="btn">👑 VIP 24 часа</div>
     </div>
-
 </div>
 
 <script>
@@ -212,12 +176,19 @@ for(let i=1;i<=100;i++){
 }
 
 function updateSelected(wheel){
-    const index = Math.round(wheel.scrollTop / 80) + 1;
+    const index = Math.max(1, Math.min(100, Math.round(wheel.scrollTop / 55) + 1));
     selected.innerText = index;
 }
 
 left.addEventListener('scroll', ()=>updateSelected(left));
 right.addEventListener('scroll', ()=>updateSelected(right));
+
+/* старт сразу на 50 */
+window.onload = () => {
+    left.scrollTop = 49 * 55;
+    right.scrollTop = 49 * 55;
+    selected.innerText = 50;
+};
 </script>
 
 </body>
